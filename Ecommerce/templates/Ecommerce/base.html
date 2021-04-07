@@ -1,0 +1,336 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang = "fr">
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!--google font-->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital@1&display=swap" rel="stylesheet">
+    <!--google font-->
+    <link href="https://fonts.googleapis.com/css?family=Oswald|Permanent+Marker&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@700&display=swap" rel="stylesheet">
+
+  <!--font awesome-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'Ecommerce/mainMenu.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'Ecommerce/App.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'Ecommerce/product.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'Ecommerce/main.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'Ecommerce/profile.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'Ecommerce/modal.css' %}">
+
+
+
+ 
+    <title>Tyshop237</title>
+</head>
+<body>
+
+    <div class = 'topNavBar d-none d-lg-block text-center'>
+        <p id = 'move'>le meilleur site e-commerce au cameroun</p>
+    </div>
+
+    
+
+        <nav class="navbar navbar-expand-lg navbar-light sticky-top navb" id='myNavbar'>
+            <div class="container">
+                <a class="navbar-brand mr-4" href="{%url 'Ecommerce-home' %}">
+                    <img src="{% static 'Ecommerce/logo.png' %}" height="50" width="200" alt='Tyshop 237' class="d-inline-block align-top">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarToggle">
+              
+                    <div class="navbar-nav mr-auto mr-lg-3"  id="myNavbar1">
+                        <a class="nav-item nav-link" href="#">Products</a>
+                        <a class="nav-item nav-link" href="#">Contact Us</a>
+                    </div>
+
+            
+                    <div class="myNavbar3 d-none d-lg-block">
+                        <form method = "post">
+                            {% csrf_token %}
+                                <div class = "form-group">
+                                    <input placeholder="search..." name='searchbox' type='text' class="form-control"/>
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fas fa-search">
+                                        </i>
+                                    </button>
+                                </div>
+                        </form>
+                    </div>
+
+
+                    
+                    <div class="myNavbar2 ml-0 ml-lg-auto navbar-nav align-items-lg-center " >
+                        <a class="nav-item nav-link d-none d-lg-block " href="{% url 'panier'%}">
+                            <button type="button" class='btn-perso-1 btn btn-outline-secondary d-inline' >
+                                Panier 
+                                
+                                <i class="fa fa-shopping-cart fa-lg">
+                                    {% if user.is_authenticated %}
+                                        <p class= "panierCount" >{{ nb_produit }}</p>
+                                    {%endif%}
+                                </i>
+                                
+                            </button>
+                        </a>
+                        {% if user.is_authenticated %}
+                            <a class="nav-item nav-link ml-mr-auto d-none d-lg-block" href="{%url 'logout' %}">
+                                <button type="button" class='btn-perso-1 btn btn-outline-secondary d-inline' >
+                                    Log out <i class="fa fa-user-times fa-lg"></i>
+                                </button>
+                            </a>
+                            <a class="nav-item nav-link ml-mr-auto d-none d-lg-block" href="{%url 'profile' %}">
+                                <img class="rounded-circle account-img-nav" src="{{ user.profile.image.url }}" alt = "photo de profile">
+                            </a>
+                            
+                        {%else%}
+                            <a class="nav-item nav-link ml-mr-auto d-none d-lg-block" href="{%url 'login' %}">
+                                <button type="button" class='btn-perso-1 btn btn-outline-secondary d-inline' >
+                                    Login <i class="fas fa-sign-in-alt fa-lg"></i>
+                                </button>
+                            </a>
+                            <a class="nav-item nav-link ml-mr-auto d-none d-lg-block" href="{%url 'user-register' %}">
+                                <button type="button" class='btn-perso-1 btn btn-outline-secondary d-inline' >
+                                    Register <i class="fa fa-user fa-lg"></i>
+                                </button>
+                            </a>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+          </div>
+        </nav>
+        <nav class="navbar navbar-expand-lg navbar-light d-block d-lg-none navb sticky-top" id='navBarSmallScreen'>
+            <div class= 'container'>
+                <div class="row" style="width : 100%">
+                    <div class="col-8 col-sm-7">
+                        <ul class="myNavbar3 nav" >
+                            <li class="nav-item">
+                                <form method = "post">
+                                    {% csrf_token %}
+                                        <div class = "form-group">
+                                            <input placeholder="search..." name='searchbox' type='text' class="form-control"/>
+                                            <button type="submit" class="btn btn-default">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-4 col-sm-5 pr-0">
+                        <ul class="myNavbar2 navbar-nav ml-0 ml-lg-auto flex-row align-items-center justify-content-around">
+
+                            
+                            <li class = "nav-item">
+                                <a class="nav-link " href="{% url 'panier'%}">
+  
+                                    <i class="fa fa-shopping-cart fa-lg" style="font-size : 25px">
+                                        {% if user.is_authenticated %}
+                                            <p class= "panierCount" >{{nb_produit}}</p>
+                                        {%endif%}
+                                    </i>  
+
+                                </a>
+                            </li>
+                            {% if user.is_authenticated %}
+                                <li class="nav-item ">
+                                    <a class="nav-link ml-mr-auto " href="{%url 'logout' %}">
+                                        <i class="fas fa-user-times fa-lg" style="font-size : 26px">
+                                            
+                                        </i>
+                                    </a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link ml-mr-auto " href="{%url 'profile' %}">
+                                        <img class="rounded-circle account-img-nav" src="{{ user.profile.image.url }}" alt = "photo de profile">
+                                    </a>
+                                </li>
+                            {%else%}
+                                <li class="nav-item ">
+                                    <a class="nav-link ml-mr-auto " href="{%url 'login' %}">
+                                        <i class="fas fa-sign-in-alt fa-lg" style="font-size : 26px">
+                                            
+                                        </i>
+                                    </a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link ml-mr-auto " href="{%url 'user-register' %}">
+                                        <i class="fa fa-user fa-lg" style="font-size : 26px">
+                                            
+                                        </i>
+                                    </a>
+                                </li>
+
+                            {% endif %}
+
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </nav>
+
+
+
+<!-- ##################################################Modal################################################ -->
+<div class="modal fade" id="modalAddCart" tabindex="-1" role="dialog" aria-labelledby="modalAddCart" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title " id="exampleModalLabel">Produit ajouté au panier</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>le produit a bien été ajouté au panier</p>
+        <p>vous pouvez passer à la commande</p>
+        <p>en cliquant sur commander</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">fermer</button>
+        <button type="button" class="btn btn-outline-secondary btn-perso-1">Commander</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    <div class="container" id = "mainContainer">
+
+      {%if messages%}
+        {% for msg in messages %}
+          <div class="alert alert-{{ msg.tags }}"> {{ msg }}</div>
+        {% endfor %}
+      {%endif%}
+        {% block content%}
+        {% endblock content %}
+    </div>
+
+    <footer class="pt-4">
+      <div class="container ">
+        <ul class="list-unstyled list-inline text-center list-link">
+          <li class="list-inline-item">
+            <a class="mx-auto my-auto">
+                <i id="social-fb" class="fab fa-facebook-f fa-2x social"></i>
+            </a>
+          </li>
+          <li class="list-inline-item">
+            <a class="mx-auto my-10">
+                <i id="social-tw" class="fab fa-twitter fa-2x social"></i>
+            </a>
+          </li>
+          <li class="list-inline-item">
+            <a class="mx-auto my-auto">
+                <i id="social-ig" class = "fab fa-instagram fa-2x social"></i>
+            </a>
+          </li>
+          <li class="list-inline-item">
+            <a class="mx-auto my-auto">
+                <i id="social-em" class="fa fa-envelope fa-2x social"></i>
+            </a>
+          </li>
+        </ul>
+
+        <div class="footer-copyright text-center py-3">© 2020 Copyright : 
+            <a href="https://tyshop237.com/">tyshop237</a>
+        </div>
+        
+      </div>
+      
+    </footer>
+
+    <a class='gotopbtn' href='#'><i class='fa fa-arrow-up'></i></a>
+
+
+        <!--jQuery-->
+
+    
+    
+    <script src = "{% static 'Ecommerce/jquery-3.6.0.min.js' %}" ></script>
+    <script src = "{% static 'Ecommerce/beforeHeader.js' %}" ></script>
+
+    <script>
+        $(document).ready(function(){
+            // /login/?next=/articles/8/addCart
+
+            $(".shopping-click").on("click",function(e){
+                pr_id = parseInt(e.target.id)
+                console.log(pr_id)
+                $.ajax(
+                    {
+                        type:"post",
+                        url : "/articles/"+pr_id+"/addCart",
+                        
+                        
+                        success: function( data ) 
+                        {   console.log(data)
+
+                            $('.panierCount').text(function(i, origText){
+                                number = 1 + parseInt(origText)
+                                console.log(origText)
+                                
+                                return number;
+                            });
+
+                            $('.panierCount').addClass('shake')
+
+                            setTimeout(function(){
+                                    $('.panierCount').removeClass('shake');
+
+                                    $('#modalAddCart').modal('show'); 
+        
+                            },900)
+                            
+
+                            
+                        },
+                        error : function(err){
+                            console.log(err)
+                            if (err.status == 403){
+
+                                window.location.href = "/login/?next="+err.responseText.slice(0,11)
+
+                            }
+                            else if(err.status == 302){
+                                alert("le produit est déja dans votre panier")
+                            }
+                            else{
+                                console.log(err.statusText+" "+err.status)
+                                alert(err.statusText+" "+err.status)
+                            }
+
+                        }
+                    }
+                )
+            })
+
+
+        })
+
+    </script>
+
+    <!-- Optional JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

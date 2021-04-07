@@ -1,0 +1,18 @@
+{% extends "Ecommerce/base.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12 col-md-8 mx-auto">
+           
+            <h2 class="mb-4 pb-3 mt-3 border-bottom text-center  font-weight-bold font-capitalize text-title">
+                    Vous avez été <strong class='text-yellow'>déconnecté !</strong></h2>
+            <div class="pt-3">
+                <small class="text-muted">
+                    <a href="{% url 'login' %}">Connectez vous encore</a>
+                </small>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock content %}

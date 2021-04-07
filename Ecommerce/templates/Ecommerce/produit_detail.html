@@ -1,0 +1,57 @@
+{% extends "Ecommerce/base.html"%}
+
+
+{% block content%}
+
+    <div class = "row produit-detail">
+        <div class="col-12 col-md-6 mt-5">
+            <h3 class ="text-lg-left ml-lg-0 text-center text-uppercase font-weight-bold py-2 ml-4">{{object.title}}</h3>
+            <img src = "{{object.image.url}}" alt="un produit" class="img-fluid product-img mx-auto d-block d-lg-inline">
+            
+
+        </div>
+        
+        <div class="col-12 col-md-6 mt-5">
+
+            {% if object.promo == 0%}
+                <div class = "price-detail">
+                    <p class='new-price text-center py-2'>{{ object.price}} €</p>
+                </div>
+            {%else%}
+                <div class = "price-detail d-flex">
+                    <p class = "text-center py-2" id = "firstp"> - {{ object.promo}}%</p>
+                    <p class='new-price mr-3 text-center py-2'>{{ promo_prix }} €</p>
+                    <p class='old-price text-center py-2'>{{ object.price}} €</p>
+                </div>
+            {%endif%}
+
+            <h5 class = "text-left mt-5">{{object.description}}</h5>
+            
+        </div>
+
+
+    </div>
+    <div class="row produit-detail-action">
+        <div class = 'col-12'>
+            
+                
+                    <p class="fa fa-shopping-cart mr-3 shopping-click" id = "{{object.id}}"></p>
+                
+
+                {% if user.is_superuser %}
+                    <a href="{% url 'article-update' object.id%}">
+                        <p class="fas fa-pencil-alt"></p>
+                    </a>
+
+                    <a href="{% url 'article-delete' object.id%}">
+                        <p class="fas fa-trash"></p>
+                    </a>
+                {%endif%}
+
+  
+            
+        </div>
+    </div>
+
+
+{% endblock content%}

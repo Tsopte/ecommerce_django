@@ -1,0 +1,54 @@
+#menuPrincipal{
+    background-color: white;
+    min-height: 100%;
+}
+
+#menuPrincipal a{
+    color: #3b3a32;
+    transition: all 0.5s;
+    text-decoration: none;
+}
+#menuPrincipal a:hover,#menuPrincipal a:hover i{
+    color: #ffbb02;    
+}
+
+#menuPrincipal i{
+    display: inline-block;
+    width: 25px;
+    height: 20px;
+    text-align: center;
+}
+
+#carousselPrincipal{
+    min-height: 100%;
+    padding: 0;
+}
+
+#carousselPrincipal img{
+    min-height: 100%;
+}
+
+#brandingPrincipal{
+    min-height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    border: 8px solid white;
+}
+
+.brandingItem{
+    min-height: 155px;
+    width: 100%;
+    
+}
+.brandingItem:first-child{
+    margin-bottom: 0px;
+    border-bottom: 20px solid white;
+    
+}
+/******************************************************contact***************************************************/
+#contact-form input,#contact-form textarea,#contact-form select{
+    background-color: rgba(214, 214, 212,0.2) ;
+}

@@ -1,0 +1,25 @@
+/**********************************************profile*******************************/
+.account-img{
+    height: 125px;
+    width: 125px;
+    margin-right: 20px;
+    margin-bottom: 16px;
+}
+
+.account-img-nav{
+    height: 38px;
+    width: 38px;
+}
+.account-heading{
+font-size: 2.5rem;
+}
+
+.media{
+    background-color: #fff;
+    color: #000;
+    border-radius: 10px;
+    transition: all ease-in-out .5s;  
+}
+.media:hover{
+    transform: scale(1.1);
+}

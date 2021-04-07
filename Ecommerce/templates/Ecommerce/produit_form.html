@@ -1,0 +1,20 @@
+{% extends "Ecommerce/base.html" %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="row">
+        <div class="col-8 col-md-4 mx-auto">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <legend class="mb-4 pb-2 border-bottom text-center">Ajoutez un Produit </legend>
+                        {{ form | crispy }}
+                </div>
+    
+                <div class="from-group">
+                    <button class="btn btn-outline-info" type="submit">Ajouter</button>
+                </div>    
+            </form>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,81 @@
+{% extends "Ecommerce/base.html"%}
+
+{% block content %}
+    <h2 class="mb-4 pb-3 mt-3 border-bottom text-center  font-weight-bold font-capitalize text-title">
+            votre <strong class='text-yellow'>panier</strong>
+    </h2>
+
+    <div class = "container">
+        {% if nb_produit == 0%}
+            <h1 class='text-center font-capitalize font-weight-bold'>votre panier est vide pour le moment</h1>
+
+        {% else %}
+
+            <div class='container-fluid text-center d-none d-lg-block py-2'>
+                <div class='row'>
+                    <div class='col-2 mx-auto'>
+                        <p class='text-uppercase'>produit</p>
+                    </div>
+                    <div class='col-2 mx-auto'>
+                        <p class='text-uppercase'>nom du produit</p>
+                    </div>
+                    <div class='col-2 mx-auto'>
+                        <p class='text-uppercase'>p. unitaire</p>
+                    </div>
+                    <div class='col-2 mx-auto'>
+                        <p class='text-uppercase'>quantite</p>
+                    </div>
+                    <div class='col-2 mx-auto'>
+                        <p class='text-uppercase'>supprimer</p>
+                    </div>
+                    <div class='col-2 mx-auto'>
+                        <p class='text-uppercase'>p. total</p>
+                    </div>
+                </div>
+            </div>
+
+            {%for p,promo_prix in produits%}
+               
+                <div class='container-fluid text-center '>
+                    <div class='row mx-1 cartItem ' id = "pin{{p.produit_in.id}}">
+                        <div class='col-10 col-lg-2 mx-auto'>
+                            <img class='img-fluid' width='100' src={{ p.produit_in.image.url }} alt = {{p.produit_in.title}}/>
+                        </div>
+                        <div class='col-10 col-lg-2 mx-auto my-auto'>
+                            <p class='text-uppercase '>{{p.produit_in.title}}</p>
+                        </div>
+                        <div class='col-10 col-lg-2 mx-auto my-auto'>
+                            <p class='font-weight-bold' id = "pu{{p.produit_in.id}}">{{p.produit_in.price}}</p>
+                        </div>
+
+                        <div class='col-10 col-lg-2 mx-auto my-lg-auto my-3'>
+                            <button class='btn btn-primary outline buttonCart addquantite'id = "plus{{p.produit_in.id}}" >
+                                <span class='fa fa-plus ' ></span>
+                            </button>
+                            <button class='btn btn-primary outline buttonCart buttonCart-middle'>
+                                <span id = "q{{p.produit_in.id}}"> {{p.quantite}} </span>
+                            </button>
+                            <button class='btn btn-primary outline buttonCart removequantite' id = "moins{{p.produit_in.id}}">
+                                <span class='fa fa-minus' ></span>
+                            </button>
+                        </div>
+
+
+                        <div class='col-10 col-lg-2 mx-auto my-3'>
+                            <Button class='btn btn-primary outline buttonCart buttonCartDelete'>
+                                <a class='fa fa-times m-auto' href = "{% url 'remove_cart' p.produit_in.id %}"></a>
+                            </Button>
+                        </div>
+
+                        <div class='col-10 col-lg-2 mx-auto my-auto'>
+                            <p class='font-weight-bold' id = "pt{{p.produit_in.id}}">{{p.produit_in.price}}</p>
+                        </div>
+                    </div>
+                </div>
+            {%endfor%}
+        {% endif%}
+
+
+    </div>
+
+{% endblock content%}

@@ -1,0 +1,28 @@
+{% extends "Ecommerce/base.html" %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="row">
+        <div class="col-8 col-md-4 mx-auto">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <legend class="mb-4 pb-3 mt-3 border-bottom text-center  font-weight-bold font-capitalize text-title">
+                    Connectez <strong class='text-yellow'>Vous !</strong></legend>
+                        {{ form | crispy }}
+                </div>
+    
+                <div class="from-group">
+                    <button class="btn btn-outline-info" type="submit">Connection</button>
+                </div>
+    
+                <div class="border-top mt-3">
+                    <small class="text-muted">
+                        Besoin d'un compte? <a class="ml-2" href="{% url 'user-register' %}">Créer votre compte</a>
+                    </small>
+                </div>
+    
+            </form>
+        </div>
+    </div>
+{% endblock content %}
